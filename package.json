@@ -1,0 +1,13 @@
+{
+  "name": "student-benefit-navigator",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Agent-ready higher-education discount discovery prototype",
+  "scripts": {
+    "test": "node scripts/smoke-test.js",
+    "sync:airtable": "node scripts/sync-airtable.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
