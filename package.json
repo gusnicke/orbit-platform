@@ -4,11 +4,9 @@
   "private": true,
   "description": "Agent-ready higher-education discount discovery prototype",
   "scripts": {
+    "build": "node scripts/build-catalog.js",
     "test": "npm run build && node scripts/smoke-test.js",
-    "sync:airtable": "npm run build && node scripts/sync-airtable.mjs",
-    "build": "node scripts/build-catalog.js"
+    "sync:airtable": "npm run build && node scripts/sync-airtable.mjs"
   },
-  "engines": {
-    "node": ">=20"
-  }
+  "engines": { "node": ">=20" }
 }
