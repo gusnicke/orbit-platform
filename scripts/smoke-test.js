@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+const core = require('../api/_core');
+assert.equal(core.offers.length, 140);
+const summary = core.summary();
+assert.equal(summary.counts.offers, 140);
+assert.equal(summary.counts.categories, 29);
+const filtered = core.filterOffers({ category:'AI tools' });
+assert.ok(filtered.length > 0);
+const rec = core.recommend({ country:'SE', school_email:true, github_verified:true, commercial_required:false }, 'web-development', 10);
+assert.ok(rec.recommendations.length > 0);
+const stack = core.buildStack({ country:'SE', school_email:true, github_verified:true }, 'student-startup', 8);
+assert.ok(stack.offers.length > 0);
+console.log(JSON.stringify({ ok:true, offers:core.offers.length, categories:summary.counts.categories, ai_offers:filtered.length, recommendations:rec.recommendations.length, stack:stack.offers.length }, null, 2));
