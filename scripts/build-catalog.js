@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const zlib = require('node:zlib');
+const dataDir = path.join(process.cwd(), 'data');
+const meta = JSON.parse(fs.readFileSync(path.join(dataDir, 'meta.json'), 'utf8'));
+const offerFiles = fs.readdirSync(dataDir).filter((name) => /^offers-\d+\.json$/.test(name)).sort();
+if (!offerFiles.length) throw new Error('No offer source parts found.');
+const offers = offerFiles.flatMap((name) => JSON.parse(fs.readFileSync(path.join(dataDir, name), 'utf8')));
+const packed = zlib.gzipSync(JSON.stringify({ ...meta, offers }), { level: 9 }).toString('base64');
+fs.writeFileSync(path.join(dataDir, 'catalog.json.gz.b64'), packed);
+console.log(`Built runtime catalog from ${offerFiles.length} source parts: ${offers.length} offers.`);
