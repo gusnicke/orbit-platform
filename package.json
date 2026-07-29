@@ -5,7 +5,8 @@
   "description": "Agent-ready higher-education discount discovery prototype",
   "scripts": {
     "test": "node scripts/smoke-test.js",
-    "sync:airtable": "node scripts/sync-airtable.mjs"
+    "sync:airtable": "npm run build && node scripts/sync-airtable.mjs",
+    "build": "node scripts/build-catalog.js"
   },
   "engines": {
     "node": ">=20"
